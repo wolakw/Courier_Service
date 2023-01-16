@@ -16,7 +16,7 @@ import javax.annotation.security.PermitAll;
 
 @PermitAll
 @Route(value="", layout = MainLayout.class)
-@PageTitle("Contacts | Vaadin CRM")
+@PageTitle("Wolszyn | Clients")
 public class ListView extends VerticalLayout {
     Grid<Contact> grid = new Grid<>(Contact.class);
     TextField filterText = new TextField();

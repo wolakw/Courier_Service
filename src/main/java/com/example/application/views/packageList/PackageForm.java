@@ -40,6 +40,7 @@ public class PackageForm extends FormLayout {
         addClassName("package-form");
         binder.bindInstanceFields(this);
         status.setItems(statuses);
+        status.setItemLabelGenerator(Status::getName);
 
         add(weight,
                 height,

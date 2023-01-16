@@ -7,6 +7,7 @@ import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -23,15 +24,17 @@ public class MainLayout extends AppLayout {
     }
 
     private void createHeader() {
-        H1 logo = new H1("Vaadin CRM");
+        H1 logo = new H1("Wolszyn | Courier system");
         logo.addClassNames("text-l", "m-m");
 
-        Button logout = new Button("Log out", e -> securityService.logout());
+        Image baner = new Image("images/logo.png", "logo");
 
-        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo, logout);
+
+        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo, baner);
 
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         header.expand(logo);
+
         header.setWidth("100%");
         header.addClassNames("py-0", "px-m");
 
@@ -40,25 +43,29 @@ public class MainLayout extends AppLayout {
     }
 
     private void createDrawer() {
-        RouterLink listLink = new RouterLink("List", ListView.class);
+        RouterLink listLink = new RouterLink("Client list", ListView.class);
         listLink.setHighlightCondition(HighlightConditions.sameLocation());
+        Button logout = new Button("Log out", e -> securityService.logout());
 
-        RouterLink packageList = new RouterLink("Package List", PackageList.class);
+        RouterLink packageList = new RouterLink("Package list", PackageList.class);
         packageList.setHighlightCondition(HighlightConditions.sameLocation());
         if (securityService.getAuthenticatedUser().getUsername() == "admin") {
             addToDrawer(new VerticalLayout(
                     listLink,
                     new RouterLink("Dashboard", DashboardView.class),
-                    packageList
+                    packageList,
+                    logout
             ));
         } else if (securityService.getAuthenticatedUser().getUsername()== "kurier") {
             addToDrawer(new VerticalLayout(
                     listLink,
-                    packageList
+                    packageList,
+                    logout
             ));
         } else {
             addToDrawer(new VerticalLayout(
-                    packageList
+                    packageList,
+                    logout
             ));
         }
     }

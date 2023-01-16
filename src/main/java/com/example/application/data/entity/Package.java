@@ -11,50 +11,50 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Package extends AbstractEntity {
     @NotEmpty
-    private double weight;
+    private String weight;
 
     @NotEmpty
-    private double height;
+    private String height;
 
     @NotEmpty
-    private double width;
+    private String width;
 
     @NotEmpty
-    private double length;
+    private String length;
 
     @NotNull
     @ManyToOne
     private Status status;
 
-    public double getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 
-    public double getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 
-    public double getWidth() {
+    public String getWidth() {
         return width;
     }
 
-    public void setWidth(double width) {
+    public void setWidth(String width) {
         this.width = width;
     }
 
-    public double getLength() {
+    public String getLength() {
         return length;
     }
 
-    public void setLength(double length) {
+    public void setLength(String length) {
         this.length = length;
     }
 

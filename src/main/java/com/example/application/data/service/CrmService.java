@@ -17,20 +17,17 @@ public class CrmService {
     private final StatusRepository statusRepository;
     private final CourierRepository courierRepository;
     private final PackageRepository packageRepository;
-    private final RegionRepository regionRepository;
 
     public CrmService(ContactRepository contactRepository,
                       CompanyRepository companyRepository,
                       StatusRepository statusRepository,
                       CourierRepository courierRepository,
-                      PackageRepository packageRepository,
-                      RegionRepository regionRepository) {
+                      PackageRepository packageRepository) {
         this.contactRepository = contactRepository;
         this.companyRepository = companyRepository;
         this.statusRepository = statusRepository;
         this.courierRepository = courierRepository;
         this.packageRepository = packageRepository;
-        this.regionRepository = regionRepository;
     }
 
     public List<Contact> findAllContacts(String stringFilter) {

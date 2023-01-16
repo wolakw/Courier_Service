@@ -64,7 +64,10 @@ INSERT INTO "CONTACT" VALUES
                           (60, 1, 'gary.osborne@do.ga', 'Gary', 'Osborne', 7, 5);
 INSERT INTO "PACKAGE" VALUES
                           (61, 1, 2, 0.4, 0.3, 0.6, 1),
-                          (62, 1, 3, 0.1, 3, 4, 1),
+                          (62, 1, 3, 0.1, 3, 4, 2),
                           (63, 1, 1, 0.2, 2, 0.6, 1),
-                          (64, 1, 0.1, 0.1, 0.3, 0.2, 1),
+                          (64, 1, 0.1, 0.1, 0.3, 0.2, 3),
                           (65, 1, 0.5, 0.4, 0.8, 6, 1);
+INSERT INTO "COURIER" VALUES
+                          (66, 1, 'Frances', 'Koopmans'),
+                          (67, 1, 'Frances', 'Fujimoto');

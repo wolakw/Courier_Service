@@ -16,7 +16,7 @@ import javax.annotation.security.PermitAll;
 
 @PermitAll
 @Route(value = "package", layout = MainLayout.class)
-@PageTitle("Przesyłki | Wolsztyn")
+@PageTitle("Wolszyn | Packages")
 public class PackageList extends VerticalLayout {
     Grid<Package> grid = new Grid<>(Package.class);
     TextField filterText = new TextField();
