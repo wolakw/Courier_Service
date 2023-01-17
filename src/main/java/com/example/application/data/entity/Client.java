@@ -13,14 +13,10 @@ public class Client extends AbstractEntity {
 
     @NotEmpty
     private String firstName = "";
-
     @NotEmpty
     private String lastName = "";
-
-    @NotNull
-    @ManyToOne
-    private Status status;
-
+    @NotEmpty
+    private String address = "";
     @Email
     @NotEmpty
     private String email = "";
@@ -46,19 +42,19 @@ public class Client extends AbstractEntity {
         this.lastName = lastName;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

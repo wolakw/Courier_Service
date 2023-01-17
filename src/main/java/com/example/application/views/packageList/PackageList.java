@@ -15,7 +15,7 @@ import com.vaadin.flow.router.Route;
 import javax.annotation.security.PermitAll;
 
 @PermitAll
-@Route(value = "package", layout = MainLayout.class)
+@Route(value = "", layout = MainLayout.class)
 @PageTitle("Wolszyn | Packages")
 public class PackageList extends VerticalLayout {
     Grid<Package> grid = new Grid<>(Package.class);
@@ -45,7 +45,7 @@ public class PackageList extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new PackageForm(service.findAllStatuses());
+        form = new PackageForm(service.findAllStatuses(), service.findAllClients(null), service.findAllCouriers(null));
         form.setWidth("25em");
         form.addListener(PackageForm.SaveEvent.class, this::savePackage);
         form.addListener(PackageForm.DeleteEvent.class, this::deletePackage);
@@ -57,6 +57,8 @@ public class PackageList extends VerticalLayout {
         grid.setSizeFull();
         grid.setColumns("id","weight", "height", "width", "length");
         grid.addColumn(pack -> pack.getStatus().getName()).setHeader("Status");
+        grid.addColumn(pack -> pack.getClient().toString()).setHeader("Client");
+        grid.addColumn(pack -> pack.getCourier().toString()).setHeader("Courier");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(event ->

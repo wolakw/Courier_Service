@@ -24,7 +24,8 @@ public class ClientForm extends FormLayout {
   TextField firstName = new TextField("First name");
   TextField lastName = new TextField("Last name");
   EmailField email = new EmailField("Email");
-  ComboBox<Status> status = new ComboBox<>("Status");
+  TextField address = new TextField("Address");
+
   Binder<Client> binder = new BeanValidationBinder<>(Client.class);
 
   Button save = new Button("Save");
@@ -35,16 +36,14 @@ public class ClientForm extends FormLayout {
     this.contact = contact;
     binder.readBean(contact);
   }
-  public ClientForm(List<Status> statuses) {
+  public ClientForm() {
     addClassName("contact-form");
     binder.bindInstanceFields(this);
-    status.setItems(statuses);
-    status.setItemLabelGenerator(Status::getName);
 
     add(firstName,
         lastName,
         email,
-        status,
+        address,
         createButtonsLayout());
   }
 

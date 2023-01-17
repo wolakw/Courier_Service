@@ -45,4 +45,9 @@ public class Courier extends AbstractEntity {
     public void setPackages(@Nullable List<Package> packages) {
         this.packages = packages;
     }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + " id: " + getId();
+    }
 }

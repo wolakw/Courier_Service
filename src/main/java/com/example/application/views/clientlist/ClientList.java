@@ -15,7 +15,7 @@ import com.vaadin.flow.router.Route;
 import javax.annotation.security.PermitAll;
 
 @PermitAll
-@Route(value="", layout = MainLayout.class)
+@Route(value="clients", layout = MainLayout.class)
 @PageTitle("Wolszyn | Clients")
 public class ClientList extends VerticalLayout {
     Grid<Client> grid = new Grid<>(Client.class);
@@ -45,7 +45,7 @@ public class ClientList extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new ClientForm(service.findAllStatuses());
+        form = new ClientForm();
         form.setWidth("25em");
         form.addListener(ClientForm.SaveEvent.class, this::saveContact);
         form.addListener(ClientForm.DeleteEvent.class, this::deleteContact);
@@ -55,8 +55,7 @@ public class ClientList extends VerticalLayout {
     private void configureGrid() {
         grid.addClassNames("contact-grid");
         grid.setSizeFull();
-        grid.setColumns("firstName", "lastName", "email");
-        grid.addColumn(contact -> contact.getStatus().getName()).setHeader("Status");
+        grid.setColumns("firstName", "lastName", "email", "address");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(event ->
@@ -112,6 +111,6 @@ public class ClientList extends VerticalLayout {
 
 
     private void updateList() {
-        grid.setItems(service.findAllContacts(filterText.getValue()));
+        grid.setItems(service.findAllClients(filterText.getValue()));
     }
 }

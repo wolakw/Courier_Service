@@ -26,7 +26,7 @@ public class CrmService {
         this.packageRepository = packageRepository;
     }
 
-    public List<Client> findAllContacts(String stringFilter) {
+    public List<Client> findAllClients(String stringFilter) {
         if (stringFilter == null || stringFilter.isEmpty()) { 
             return clientRepository.findAll();
         } else {

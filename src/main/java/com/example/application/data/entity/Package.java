@@ -26,6 +26,14 @@ public class Package extends AbstractEntity {
     @ManyToOne
     private Status status;
 
+    @NotNull
+    @ManyToOne
+    private Client client;
+
+    @NotNull
+    @ManyToOne
+    private Courier courier;
+
     public String getWeight() {
         return weight;
     }
@@ -64,5 +72,21 @@ public class Package extends AbstractEntity {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Courier getCourier() {
+        return courier;
+    }
+
+    public void setCourier(Courier courier) {
+        this.courier = courier;
     }
 }

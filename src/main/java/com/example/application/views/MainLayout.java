@@ -44,8 +44,8 @@ public class MainLayout extends AppLayout {
     }
 
     private void createDrawer() {
-        RouterLink listLink = new RouterLink("Client list", ClientList.class);
-        listLink.setHighlightCondition(HighlightConditions.sameLocation());
+        RouterLink clientList = new RouterLink("Client list", ClientList.class);
+        clientList.setHighlightCondition(HighlightConditions.sameLocation());
         Button logout = new Button("Log out", e -> securityService.logout());
 
         RouterLink packageList = new RouterLink("Package list", PackageList.class);
@@ -56,15 +56,14 @@ public class MainLayout extends AppLayout {
 
         if (securityService.getAuthenticatedUser().getUsername() == "admin") {
             addToDrawer(new VerticalLayout(
-                    listLink,
-                    new RouterLink("Dashboard", DashboardView.class),
-                    packageList,
+                    clientList,
                     courierList,
+                    packageList,
                     logout
             ));
         } else if (securityService.getAuthenticatedUser().getUsername()== "kurier") {
             addToDrawer(new VerticalLayout(
-                    listLink,
+                    clientList,
                     packageList,
                     logout
             ));

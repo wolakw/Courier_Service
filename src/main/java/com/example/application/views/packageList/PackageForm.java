@@ -1,5 +1,7 @@
 package com.example.application.views.packageList;
 
+import com.example.application.data.entity.Client;
+import com.example.application.data.entity.Courier;
 import com.example.application.data.entity.Package;
 import com.example.application.data.entity.Status;
 import com.vaadin.flow.component.ComponentEvent;
@@ -25,6 +27,8 @@ public class PackageForm extends FormLayout {
     TextField width = new TextField("Width");
     TextField length = new TextField("Length");
     ComboBox<Status> status = new ComboBox<>("Status");
+    ComboBox<Client> client = new ComboBox<>("Client");
+    ComboBox<Courier> courier = new ComboBox<>("Courier");
     Binder<Package> binder = new BeanValidationBinder<>(Package.class);
 
     Button save = new Button("Save");
@@ -36,17 +40,23 @@ public class PackageForm extends FormLayout {
         binder.readBean(pack);
     }
 
-    public PackageForm(List<Status> statuses) {
+    public PackageForm(List<Status> statuses, List<Client> clients, List<Courier> couriers) {
         addClassName("package-form");
         binder.bindInstanceFields(this);
         status.setItems(statuses);
         status.setItemLabelGenerator(Status::getName);
+        client.setItems(clients);
+        client.setItemLabelGenerator(Client::toString);
+        courier.setItems(couriers);
+        courier.setItemLabelGenerator(Courier::toString);
 
         add(weight,
                 height,
                 width,
                 length,
                 status,
+                client,
+                courier,
                 createButtonsLayout());
     }
 
