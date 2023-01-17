@@ -12,18 +12,15 @@ import java.util.List;
 public class CrmService {
 
     private final ClientRepository clientRepository;
-    private final CompanyRepository companyRepository;
     private final StatusRepository statusRepository;
     private final CourierRepository courierRepository;
     private final PackageRepository packageRepository;
 
     public CrmService(ClientRepository contactRepository,
-                      CompanyRepository companyRepository,
                       StatusRepository statusRepository,
                       CourierRepository courierRepository,
                       PackageRepository packageRepository) {
         this.clientRepository = contactRepository;
-        this.companyRepository = companyRepository;
         this.statusRepository = statusRepository;
         this.courierRepository = courierRepository;
         this.packageRepository = packageRepository;
@@ -67,10 +64,6 @@ public class CrmService {
             return;
         }
         packageRepository.save(pack);
-    }
-
-    public List<Company> findAllCompanies() {
-        return companyRepository.findAll();
     }
 
     public List<Status> findAllStatuses(){

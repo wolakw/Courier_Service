@@ -45,7 +45,7 @@ public class ClientList extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new ClientForm(service.findAllCompanies(), service.findAllStatuses());
+        form = new ClientForm(service.findAllStatuses());
         form.setWidth("25em");
         form.addListener(ClientForm.SaveEvent.class, this::saveContact);
         form.addListener(ClientForm.DeleteEvent.class, this::deleteContact);
@@ -57,7 +57,6 @@ public class ClientList extends VerticalLayout {
         grid.setSizeFull();
         grid.setColumns("firstName", "lastName", "email");
         grid.addColumn(contact -> contact.getStatus().getName()).setHeader("Status");
-        grid.addColumn(contact -> contact.getCompany().getName()).setHeader("Company");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(event ->

@@ -1,6 +1,5 @@
 package com.example.application.views.clientlist;
 
-import com.example.application.data.entity.Company;
 import com.example.application.data.entity.Client;
 import com.example.application.data.entity.Status;
 import com.vaadin.flow.component.ComponentEvent;
@@ -26,7 +25,6 @@ public class ClientForm extends FormLayout {
   TextField lastName = new TextField("Last name");
   EmailField email = new EmailField("Email");
   ComboBox<Status> status = new ComboBox<>("Status");
-  ComboBox<Company> company = new ComboBox<>("Company");
   Binder<Client> binder = new BeanValidationBinder<>(Client.class);
 
   Button save = new Button("Save");
@@ -37,18 +35,15 @@ public class ClientForm extends FormLayout {
     this.contact = contact;
     binder.readBean(contact);
   }
-  public ClientForm(List<Company> companies, List<Status> statuses) {
+  public ClientForm(List<Status> statuses) {
     addClassName("contact-form");
     binder.bindInstanceFields(this);
-    company.setItems(companies);
-    company.setItemLabelGenerator(Company::getName);
     status.setItems(statuses);
     status.setItemLabelGenerator(Status::getName);
 
     add(firstName,
         lastName,
         email,
-        company,
         status,
         createButtonsLayout());
   }
