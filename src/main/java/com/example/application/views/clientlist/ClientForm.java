@@ -1,7 +1,7 @@
-package com.example.application.views.list;
+package com.example.application.views.clientlist;
 
 import com.example.application.data.entity.Company;
-import com.example.application.data.entity.Contact;
+import com.example.application.data.entity.Client;
 import com.example.application.data.entity.Status;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -20,24 +20,24 @@ import com.vaadin.flow.shared.Registration;
 
 import java.util.List;
 
-public class ContactForm extends FormLayout {
-  private Contact contact;
+public class ClientForm extends FormLayout {
+  private Client contact;
   TextField firstName = new TextField("First name");
   TextField lastName = new TextField("Last name");
   EmailField email = new EmailField("Email");
   ComboBox<Status> status = new ComboBox<>("Status");
   ComboBox<Company> company = new ComboBox<>("Company");
-  Binder<Contact> binder = new BeanValidationBinder<>(Contact.class);
+  Binder<Client> binder = new BeanValidationBinder<>(Client.class);
 
   Button save = new Button("Save");
   Button delete = new Button("Delete");
   Button close = new Button("Cancel");
 
-  public void setContact(Contact contact) {
+  public void setContact(Client contact) {
     this.contact = contact;
     binder.readBean(contact);
   }
-  public ContactForm(List<Company> companies, List<Status> statuses) {
+  public ClientForm(List<Company> companies, List<Status> statuses) {
     addClassName("contact-form");
     binder.bindInstanceFields(this);
     company.setItems(companies);
@@ -79,34 +79,34 @@ public class ContactForm extends FormLayout {
   }
 
   // Events
-  public static abstract class ContactFormEvent extends ComponentEvent<ContactForm> {
-    private Contact contact;
+  public static abstract class ContactFormEvent extends ComponentEvent<ClientForm> {
+    private Client contact;
 
-    protected ContactFormEvent(ContactForm source, Contact contact) {
+    protected ContactFormEvent(ClientForm source, Client contact) {
       super(source, false);
       this.contact = contact;
     }
 
-    public Contact getContact() {
+    public Client getContact() {
       return contact;
     }
   }
 
   public static class SaveEvent extends ContactFormEvent {
-    SaveEvent(ContactForm source, Contact contact) {
+    SaveEvent(ClientForm source, Client contact) {
       super(source, contact);
     }
   }
 
   public static class DeleteEvent extends ContactFormEvent {
-    DeleteEvent(ContactForm source, Contact contact) {
+    DeleteEvent(ClientForm source, Client contact) {
       super(source, contact);
     }
 
   }
 
   public static class CloseEvent extends ContactFormEvent {
-    CloseEvent(ContactForm source) {
+    CloseEvent(ClientForm source) {
       super(source, null);
     }
   }

@@ -10,7 +10,7 @@ INSERT INTO "COMPANY" VALUES
                           (8, 1, 'Laboratory Corporation of America Holdings'),
                           (9, 1, 'AutoZone, Inc.'),
                           (10, 1, 'Linens ''n Things Inc.');
-INSERT INTO "CONTACT" VALUES
+INSERT INTO "CLIENT" VALUES
                           (11, 1, 'eula.lane@jigrormo.ye', 'Eula', 'Lane', 8, 1),
                           (12, 1, 'barry.rodriquez@zun.mm', 'Barry', 'Rodriquez', 7, 5),
                           (13, 1, 'eugenia.selvi@capfad.vn', 'Eugenia', 'Selvi', 6, 3),
@@ -36,7 +36,7 @@ INSERT INTO "CONTACT" VALUES
                           (33, 1, 'larry.ciappi@ba.lk', 'Larry', 'Ciappi', 10, 2),
                           (34, 1, 'ronnie.salucci@tohhij.lv', 'Ronnie', 'Salucci', 9, 1),
                           (35, 1, 'walter.grossi@tuvo.sa', 'Walter', 'Grossi', 9, 1);
-INSERT INTO "CONTACT" VALUES
+INSERT INTO "CLIENT" VALUES
                           (36, 1, 'frances.koopmans@foga.tw', 'Frances', 'Koopmans', 7, 5),
                           (37, 1, 'frances.fujimoto@uswuzzub.jp', 'Frances', 'Fujimoto', 6, 5),
                           (38, 1, 'olivia.vidal@hivwerip.vc', 'Olivia', 'Vidal', 9, 2),

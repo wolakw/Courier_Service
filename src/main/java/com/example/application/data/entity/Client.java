@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Contact extends AbstractEntity {
+public class Client extends AbstractEntity {
 
     @NotEmpty
     private String firstName = "";

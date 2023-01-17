@@ -1,6 +1,6 @@
-package com.example.application.views.list;
+package com.example.application.views.clientlist;
 
-import com.example.application.data.entity.Contact;
+import com.example.application.data.entity.Client;
 import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.button.Button;
@@ -17,13 +17,13 @@ import javax.annotation.security.PermitAll;
 @PermitAll
 @Route(value="", layout = MainLayout.class)
 @PageTitle("Wolszyn | Clients")
-public class ListView extends VerticalLayout {
-    Grid<Contact> grid = new Grid<>(Contact.class);
+public class ClientList extends VerticalLayout {
+    Grid<Client> grid = new Grid<>(Client.class);
     TextField filterText = new TextField();
-    ContactForm form;
+    ClientForm form;
     CrmService service;
 
-    public ListView(CrmService service) {
+    public ClientList(CrmService service) {
         this.service = service;
         addClassName("list-view");
         setSizeFull();
@@ -45,11 +45,11 @@ public class ListView extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new ContactForm(service.findAllCompanies(), service.findAllStatuses());
+        form = new ClientForm(service.findAllCompanies(), service.findAllStatuses());
         form.setWidth("25em");
-        form.addListener(ContactForm.SaveEvent.class, this::saveContact);
-        form.addListener(ContactForm.DeleteEvent.class, this::deleteContact);
-        form.addListener(ContactForm.CloseEvent.class, e -> closeEditor());
+        form.addListener(ClientForm.SaveEvent.class, this::saveContact);
+        form.addListener(ClientForm.DeleteEvent.class, this::deleteContact);
+        form.addListener(ClientForm.CloseEvent.class, e -> closeEditor());
     }
 
     private void configureGrid() {
@@ -78,7 +78,7 @@ public class ListView extends VerticalLayout {
         return toolbar;
     }
 
-    public void editContact(Contact contact) {
+    public void editContact(Client contact) {
         if (contact == null) {
             closeEditor();
         } else {
@@ -88,13 +88,13 @@ public class ListView extends VerticalLayout {
         }
     }
 
-    private void saveContact(ContactForm.SaveEvent event) {
+    private void saveContact(ClientForm.SaveEvent event) {
         service.saveContact(event.getContact());
         updateList();
         closeEditor();
     }
 
-    private void deleteContact(ContactForm.DeleteEvent event) {
+    private void deleteContact(ClientForm.DeleteEvent event) {
         service.deleteContact(event.getContact());
         updateList();
         closeEditor();
@@ -108,7 +108,7 @@ public class ListView extends VerticalLayout {
 
     private void addContact() {
         grid.asSingleSelect().clear();
-        editContact(new Contact());
+        editContact(new Client());
     }
 
 

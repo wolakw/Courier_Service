@@ -11,46 +11,46 @@ import java.util.List;
 @Service 
 public class CrmService {
 
-    private final ContactRepository contactRepository;
+    private final ClientRepository clientRepository;
     private final CompanyRepository companyRepository;
     private final StatusRepository statusRepository;
     private final CourierRepository courierRepository;
     private final PackageRepository packageRepository;
 
-    public CrmService(ContactRepository contactRepository,
+    public CrmService(ClientRepository contactRepository,
                       CompanyRepository companyRepository,
                       StatusRepository statusRepository,
                       CourierRepository courierRepository,
                       PackageRepository packageRepository) {
-        this.contactRepository = contactRepository;
+        this.clientRepository = contactRepository;
         this.companyRepository = companyRepository;
         this.statusRepository = statusRepository;
         this.courierRepository = courierRepository;
         this.packageRepository = packageRepository;
     }
 
-    public List<Contact> findAllContacts(String stringFilter) {
+    public List<Client> findAllContacts(String stringFilter) {
         if (stringFilter == null || stringFilter.isEmpty()) { 
-            return contactRepository.findAll();
+            return clientRepository.findAll();
         } else {
-            return contactRepository.search(stringFilter);
+            return clientRepository.search(stringFilter);
         }
     }
 
     public long countContacts() {
-        return contactRepository.count();
+        return clientRepository.count();
     }
 
-    public void deleteContact(Contact contact) {
-        contactRepository.delete(contact);
+    public void deleteContact(Client contact) {
+        clientRepository.delete(contact);
     }
 
-    public void saveContact(Contact contact) {
+    public void saveContact(Client contact) {
         if (contact == null) { 
             System.err.println("Contact is null. Are you sure you have connected your form to the application?");
             return;
         }
-        contactRepository.save(contact);
+        clientRepository.save(contact);
     }
 
     public long countPackage() {
