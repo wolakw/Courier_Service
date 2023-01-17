@@ -19,7 +19,7 @@ public class Courier extends AbstractEntity {
 
     @OneToMany
     @Nullable
-    private List<Package> packages = new LinkedList<>();
+    public List<Package> packages = new LinkedList<>();
 
     public String getFirstName() {
         return firstName;

@@ -20,10 +20,10 @@ import java.util.List;
 
 public class PackageForm extends FormLayout {
     private Package pack;
-    TextField weight = new TextField("Waga");
-    TextField height = new TextField("Wysokość");
-    TextField width = new TextField("Szerokość");
-    TextField length = new TextField("Długość");
+    TextField weight = new TextField("Weight");
+    TextField height = new TextField("Height");
+    TextField width = new TextField("Width");
+    TextField length = new TextField("Length");
     ComboBox<Status> status = new ComboBox<>("Status");
     Binder<Package> binder = new BeanValidationBinder<>(Package.class);
 

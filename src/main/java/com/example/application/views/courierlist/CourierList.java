@@ -1,6 +1,6 @@
-package com.example.application.views.packageList;
+package com.example.application.views.courierlist;
 
-import com.example.application.data.entity.Package;
+import com.example.application.data.entity.Courier;
 import com.example.application.data.service.CrmService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.button.Button;
@@ -15,17 +15,17 @@ import com.vaadin.flow.router.Route;
 import javax.annotation.security.PermitAll;
 
 @PermitAll
-@Route(value = "package", layout = MainLayout.class)
-@PageTitle("Wolszyn | Packages")
-public class PackageList extends VerticalLayout {
-    Grid<Package> grid = new Grid<>(Package.class);
+@Route(value = "courier", layout = MainLayout.class)
+@PageTitle("Wolszyn | Couriers")
+public class CourierList extends VerticalLayout {
+    Grid<Courier> grid = new Grid<>(Courier.class);
     TextField filterText = new TextField();
-    PackageForm form;
+    CourierForm form;
     CrmService service;
 
-    public PackageList(CrmService service) {
+    public CourierList(CrmService service) {
         this.service = service;
-        addClassName("package-view");
+        addClassName("courier-view");
         setSizeFull();
         configureGrid();
         configureForm();
@@ -45,73 +45,79 @@ public class PackageList extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new PackageForm(service.findAllStatuses());
+        form = new CourierForm();
         form.setWidth("25em");
-        form.addListener(PackageForm.SaveEvent.class, this::savePackage);
-        form.addListener(PackageForm.DeleteEvent.class, this::deletePackage);
-        form.addListener(PackageForm.CloseEvent.class, e -> closeEditor());
+        form.addListener(CourierForm.SaveEvent.class, this::saveCourier);
+        form.addListener(CourierForm.DeleteEvent.class, this::deleteCourier);
+        form.addListener(CourierForm.CloseEvent.class, e -> closeEditor());
+        form.addListener(CourierForm.AssignEvent.class, this::assignPackage);
     }
 
     private void configureGrid() {
-        grid.addClassNames("package-grid");
+        grid.addClassNames("courier-grid");
         grid.setSizeFull();
-        grid.setColumns("id","weight", "height", "width", "length");
-        grid.addColumn(pack -> pack.getStatus().getName()).setHeader("Status");
+        grid.setColumns("id","firstName", "lastName");
+        //grid.addColumn(courier -> courier.getPackages()).setHeader("Packages");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(event ->
-                editPackage(event.getValue()));
+                editCourier(event.getValue()));
     }
 
     private HorizontalLayout getToolbar() {
-        filterText.setPlaceholder("Filter by id...");
+        filterText.setPlaceholder("Filter by name...");
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
         filterText.addValueChangeListener(e -> updateList());
 
         Button editButton = new Button("Add or edit");
-        editButton.addClickListener(click -> addPackage());
+        editButton.addClickListener(click -> addCourier());
 
         HorizontalLayout toolbar = new HorizontalLayout(filterText, editButton);
         toolbar.addClassName("toolbar");
         return toolbar;
     }
 
-    public void editPackage(Package pack) {
-        if (pack == null) {
+    public void editCourier(Courier courier) {
+        if (courier == null) {
             closeEditor();
         } else {
-            form.setPack(pack);
+            form.setCourier(courier);
             form.setVisible(true);
             addClassName("editing");
         }
     }
 
-    private void savePackage(PackageForm.SaveEvent event) {
-        service.savePackage(event.getPack());
+    private void saveCourier(CourierForm.SaveEvent event) {
+        service.saveCourier(event.getCourier());
         updateList();
         closeEditor();
     }
 
-    private void deletePackage(PackageForm.DeleteEvent event) {
-        service.deletePackage(event.getPack());
+    private void deleteCourier(CourierForm.DeleteEvent event) {
+        service.deleteCourier(event.getCourier());
         updateList();
         closeEditor();
     }
+
 
     private void closeEditor() {
-        form.setPack(null);
+        form.setCourier(null);
         form.setVisible(false);
         removeClassName("editing");
     }
 
-    private void addPackage() {
+    private void addCourier() {
         grid.asSingleSelect().clear();
-        editPackage(new Package());
+        editCourier(new Courier());
+    }
+
+    private void assignPackage(CourierForm.AssignEvent event) {
+        service.assignPackage(event.getCourier());
     }
 
 
     private void updateList() {
-        grid.setItems(service.findAllPackages(filterText.getValue()));
+        grid.setItems(service.findAllCouriers(filterText.getValue()));
     }
 }

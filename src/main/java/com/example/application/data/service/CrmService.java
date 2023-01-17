@@ -1,10 +1,9 @@
 package com.example.application.data.service;
 
-import com.example.application.data.entity.Company;
-import com.example.application.data.entity.Contact;
+import com.example.application.data.entity.*;
 import com.example.application.data.entity.Package;
-import com.example.application.data.entity.Status;
 import com.example.application.data.repository.*;
+import com.vaadin.flow.component.notification.Notification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -78,11 +77,46 @@ public class CrmService {
         return statusRepository.findAll();
     }
 
+    public List<Courier> findAllCouriers(String stringFilter) {
+        if (stringFilter == null || stringFilter.isEmpty()) {
+            return courierRepository.findAll();
+        } else {
+            return courierRepository.search(stringFilter);
+        }
+    }
+
     public List<Package> findAllPackages(String stringFilter) {
         if (stringFilter == null || stringFilter.isEmpty()) {
             return packageRepository.findAll();
         } else {
             return packageRepository.search(stringFilter);
         }
+    }
+
+    public void deleteCourier(Courier courier) {
+        courierRepository.delete(courier);
+    }
+
+    public void saveCourier(Courier courier) {
+        if (courier == null) {
+            System.err.println("Courier is null. Are you sure you have connected your form to the application?");
+            return;
+        }
+        courierRepository.save(courier);
+    }
+
+    public void assignPackage(Courier courier) {
+        List<Package> packages = findAllPackages(null);
+        for (Package p : packages) {
+            if(p != null && p.getStatus().getName() == "Ready to deliver") {
+                courier.getPackages().add(p);
+                courierRepository.save(courier);
+                break;
+            } else {
+                System.err.println("No more packages to assign");
+            }
+        }
+        Notification notification = Notification
+                .show("Package assigned to courier " + courier.getFirstName() + " " + courier.getLastName());
     }
 }

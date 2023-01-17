@@ -1,6 +1,7 @@
 package com.example.application.views;
 
 import com.example.application.security.SecurityService;
+import com.example.application.views.courierlist.CourierList;
 import com.example.application.views.list.ListView;
 import com.example.application.views.packageList.PackageList;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -49,11 +50,16 @@ public class MainLayout extends AppLayout {
 
         RouterLink packageList = new RouterLink("Package list", PackageList.class);
         packageList.setHighlightCondition(HighlightConditions.sameLocation());
+
+        RouterLink courierList = new RouterLink("Courier list", CourierList.class);
+        courierList.setHighlightCondition(HighlightConditions.sameLocation());
+
         if (securityService.getAuthenticatedUser().getUsername() == "admin") {
             addToDrawer(new VerticalLayout(
                     listLink,
                     new RouterLink("Dashboard", DashboardView.class),
                     packageList,
+                    courierList,
                     logout
             ));
         } else if (securityService.getAuthenticatedUser().getUsername()== "kurier") {

@@ -1,6 +1,7 @@
 package com.example.application.views;
 
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEnterEvent;
@@ -14,7 +15,8 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 @AnonymousAllowed
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
-	private final LoginForm login = new LoginForm(); 
+	private final LoginForm login = new LoginForm();
+	Image baner = new Image("images/logo1.png", "logo");
 
 	public LoginView(){
 		addClassName("login-view");
@@ -23,8 +25,9 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		setJustifyContentMode(JustifyContentMode.CENTER);
 
 		login.setAction("login");
+		login.setForgotPasswordButtonVisible(false);
 
-		add(new H1("Wolszyn | Courier system"), login);
+		add(baner, login);
 	}
 
 	@Override

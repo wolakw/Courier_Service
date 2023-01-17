@@ -1,7 +1,7 @@
 INSERT INTO "STATUS" VALUES
-                         (1, 1, 'Imported lead'),
-                         (2, 1, 'Not contacted'),
-                         (3, 1, 'Contacted'),
+                         (1, 1, 'Ready to deliver'),
+                         (2, 1, 'On delivery'),
+                         (3, 1, 'Delivered'),
                          (4, 1, 'Customer'),
                          (5, 1, 'Closed (lost)');
 INSERT INTO "COMPANY" VALUES
